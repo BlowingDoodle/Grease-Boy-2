@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Security.Principal;
 using Unity.VisualScripting;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Movimiento : MonoBehaviour
 {
 
@@ -23,6 +23,26 @@ public class Movimiento : MonoBehaviour
     public float jumpForce;
 
 
+    public Text WINTEXT;
+    public Text DEADTEXT;
+    public Text PUNTOSTEXT;
+    public Text Score;
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.tag == "WIN")
+        {
+            WINTEXT.gameObject.SetActive(true);
+            PUNTOSTEXT.gameObject.SetActive(false);
+            Time.timeScale = ((0));
+        }
+        if (collision.tag == "DEAD")
+        {
+            DEADTEXT.gameObject.SetActive(true);
+            PUNTOSTEXT.gameObject.SetActive(false);
+            Score.gameObject.SetActive(false);
+            Time.timeScale = ((0));
+        }
+    }
     void Start()
     {
         player = GetComponent<CharacterController>();
